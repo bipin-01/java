@@ -1,0 +1,52 @@
+//A.java
+public class A {
+	public int x, y;
+	public void showxy()
+	{
+		System.out.println("X = " + x  + " Y = " + y);
+	}
+}
+
+//B.java
+public class B extends A
+{
+	int z;
+	public void showz()
+	{
+		System.out.println("Z = " + z);
+		System.out.println("X + Y + Z = " + (x + y + z));
+	}
+}
+
+//InheritanceDemo.java
+import java.util.Scanner;
+public class InheritanceDemo {
+	public static void main(String args[])
+	{
+		int x, y, z;
+		Scanner sc = new Scanner(System.in);
+		//Creating ob of base class A
+		A baseObj = new A();
+		System.out.println("Enter value for x & y :");
+		x = sc.nextInt();
+		y = sc.nextInt();
+		baseObj.x = x;
+		baseObj.y = y;
+		System.out.println("Contents of base object : ");
+		baseObj.showxy();
+		//Creating ob of derived class B
+		B derivedObj = new B();
+		System.out.println("Enter value for x, y & z :");
+		x = sc.nextInt();
+		y = sc.nextInt();
+		z = sc.nextInt();
+		derivedObj.x = x;
+		derivedObj.y = y;
+		derivedObj.z = z;
+		System.out.println("Contents of derived object : ");
+		derivedObj.showz();
+		
+	}
+}
+
+

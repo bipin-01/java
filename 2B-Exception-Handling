@@ -1,0 +1,61 @@
+
+public class FinallyDemo {
+	
+	//creating static class for not to instantiate  via class
+	static void procA()
+	{
+		try
+		{
+			//with throw
+			System.out.println("Inside procA");
+			throw new RuntimeException();
+		}
+		finally
+		{
+			System.out.println("Inside procA finally");
+		}
+	}
+	
+	static void procB()
+	{
+		try
+		{
+			//with return
+			System.out.println("Inside procB");
+			return;
+		}
+		finally
+		{
+			System.out.println("Inside procB finally");
+		}
+	}
+	
+	static void procC()
+	{
+		try
+		{
+			//normally
+			System.out.println("Inside procC");
+		}
+		finally
+		{
+			System.out.println("Inside procC finally");
+		}
+	}
+	
+	public static void main(String args[])
+	{
+		try
+		{
+			procA();
+		}
+		catch(RuntimeException e)
+		{
+			System.out.println("Exception caught...");
+		}
+		procB();
+		procC();
+		
+	}
+
+}

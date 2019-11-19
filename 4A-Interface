@@ -1,0 +1,26 @@
+//Callback.java
+package Callback;
+
+public interface Callback {
+		public void Callback(int param);
+}
+
+//Client.java
+package Callback;
+public class Client implements Callback {
+	public void Callback(int param)
+	{
+		System.out.println("Callbacke called with " + param);
+	}
+}
+
+//TestFace.java
+package Callback;
+public class TestFace {
+		public static void main(String args[])
+		{
+			Client c = new Client();
+			c.Callback(10);
+		}
+}
+

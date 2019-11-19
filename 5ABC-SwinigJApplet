@@ -1,0 +1,75 @@
+/*
+ <applet code = "JTabbedPaneDemo" width = 400 height = 80>
+ </applet>
+ */
+import javax.swing.*;
+public class JTabbedPaneDemo extends JApplet {
+	public void init()
+	{
+		try
+		{
+			SwingUtilities.invokeAndWait(
+					new Runnable() {
+						public void run() {
+							makeGUI();
+						}
+					}
+					);
+		}
+		catch(Exception exc)
+		{
+			System.out.println("Can not create because of " + exc);
+		}
+	}
+	public void makeGUI()
+	{
+		JTabbedPane jtb = new JTabbedPane();
+		jtb.addTab("Cities", new CitiesPanel());
+		jtb.addTab("Colors", new ColorsPanel());
+		jtb.addTab("Flavors", new FlavorsPanel());
+		add(jtb);
+	}
+}
+
+class CitiesPanel extends JPanel
+{
+	public CitiesPanel() {
+		
+	
+	JButton jb1 = new JButton("Kathamndu");
+	add(jb1);
+	JButton jb2 = new JButton("Lumbini");
+	add(jb2);
+	JButton jb3 = new JButton("Pokhara");
+	add(jb3);
+	JButton jb4 = new JButton("Kawasoti");
+	add(jb4);
+	}
+}
+
+class ColorsPanel extends JPanel
+{
+	public ColorsPanel()
+	{
+		JCheckBox cbx1 = new JCheckBox("Red");
+		add(cbx1);
+		JCheckBox cbx2 = new JCheckBox("Green");
+		add(cbx2);
+		JCheckBox cbx3 = new JCheckBox("Yellow");
+		add(cbx3);
+		JCheckBox cbx4 = new JCheckBox("Blue");
+		add(cbx4);
+	}
+}
+
+class FlavorsPanel extends JPanel
+{
+	public FlavorsPanel()
+	{
+		JComboBox combo = new JComboBox();
+		combo.addItem("Vanilla");
+		combo.addItem("Strawberry");
+		combo.addItem("Chocolate");
+		add(combo);
+	}
+}

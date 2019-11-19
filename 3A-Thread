@@ -1,0 +1,93 @@
+//Thread1a.java
+public class Thread1a implements Runnable {
+	long click;
+	private volatile boolean running = true;
+	Thread t;
+	
+	public Thread1a(int p)
+	{
+		t = new Thread(this);
+		t.setPriority(p);
+	}
+	public void run()
+	{
+		while(running)
+		{
+			click++;
+		}
+	}
+
+	public void start()
+	{
+		t.start();
+	}
+	public void stop()
+	{
+		running = false;
+	}
+}
+
+//Demo.java
+public class Demo {
+	public static void main(String args[]) {
+		
+	
+	Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
+	Thread1a hi1 = new Thread1a(Thread.NORM_PRIORITY + 2);
+	Thread1a hi2 = new Thread1a(Thread.NORM_PRIORITY - 2);
+	Thread1a hi3 = new Thread1a(Thread.NORM_PRIORITY + 3);
+	Thread1a hi4 = new Thread1a(Thread.NORM_PRIORITY - 3);
+	Thread1a hi5 = new Thread1a(Thread.NORM_PRIORITY + 4);
+	
+	hi1.start();
+	hi2.start();
+	hi3.start();
+	hi4.start();
+	hi5.start();
+	
+	System.out.println("Thread 1 is alive : " + hi1.t.isAlive());
+	System.out.println("Thread 2 is alive : " + hi2.t.isAlive());
+	System.out.println("Thread 3 is alive : " + hi3.t.isAlive());
+	System.out.println("Thread 4 is alive : " + hi4.t.isAlive());
+	System.out.println("Thread 5 is alive : " + hi5.t.isAlive());
+	
+	try
+	{
+		hi3.t.sleep(1000);
+		hi5.t.sleep(1000);
+	}
+	catch(InterruptedException e)
+	{
+		System.out.println("Maint thread is interrupted");
+	}
+	hi1.stop();
+	hi2.stop();
+	hi3.stop();
+	hi4.stop();
+	hi5.stop();
+	try
+	{
+		System.out.println("Waiting thread to finish...");
+		hi1.t.join();
+		hi2.t.join();
+		hi3.t.join();
+		hi4.t.join();
+		hi5.t.join();
+	}
+	catch(InterruptedException e1)
+	{
+		System.out.println("Main thread is interrupted");
+	}
+	System.out.println("Priority of thread 1 : " + hi1.t.getPriority());
+	System.out.println("Priority of thread 2 : " + hi2.t.getPriority());
+	System.out.println("Priority of thread 3 : " + hi3.t.getPriority());
+	System.out.println("Priority of thread 4 : " + hi4.t.getPriority());
+	System.out.println("Prioirty of thread 5 : " + hi5.t.getPriority());
+	
+	System.out.println("Thread 1 is alive : " + hi1.t.isAlive());
+	System.out.println("Thread 2 is alive : " + hi2.t.isAlive());
+	System.out.println("Thread 3 is alive : " + hi3.t.isAlive());
+	System.out.println("Thread 4 is alive : " + hi4.t.isAlive());
+	System.out.println("Thread 5 is alive : " + hi5.t.isAlive());
+}
+}

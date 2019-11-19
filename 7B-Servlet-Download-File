@@ -1,0 +1,85 @@
+ import java.io.*;
+import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.*;
+
+@SuppressWarnings("serial")
+@WebServlet("/Servlet7b")
+public class Servlet7b extends HttpServlet
+{
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		String filename = request.getParameter("fname");
+		String root = "/" + filename;
+		System.out.println(root);
+		String absolutePath = getServletContext().getRealPath(root);
+		File fp = new File(absolutePath);
+		
+		if(fp.exists())
+		{
+			out.println("<!DOCTYPE html><head><title>Download Page</title></head><body bgcolor = 'lightblue'>");
+			out.println("<h2>" + fp.getName() + "</h2>");
+			out.println("<hr size = '20' style = 'color: 'green';>");
+			out.println("<h2>Content of file: <h2><br />");;
+			BufferedReader bf = new BufferedReader(new FileReader(fp));
+			
+			String data;
+			
+			while((data = bf.readLine()) != null)
+			{
+				out.write(data);
+				out.flush();
+				out.println("<br />");
+				
+			}
+			out.println("<hr size = '20' style = 'color: red;'>");
+			out.println("</body></html");
+			bf.close();
+		}
+		else
+		{
+			out.println("<!DOCTYPE html><title>Eror Page</title><body bgcolor='lightblue'><h1>File does not exist</h1>");
+			out.println("</body></html");
+		}
+		
+		
+	}
+	
+}
+
+//hompage.html
+<!DOCTYPE html>
+<html><head><title>Homepage</title></head>
+
+<body bgcolor = "lightblue">
+<h1>Download Java Servlet Program</h1>
+<form name = "form1" method = "get" action = "http://localhost:8080/Servlet7bProg/Servlet7b">
+	<center>
+	
+		Browse File <input type = "file"  name = "fname" size = "20" />
+		</br>
+		</br>
+		<input type = "submit" value = "Click here to downoad" onclick = "validate()" />
+	</center>
+
+</form>
+<script>
+function validate()
+{
+	if(document.form1.fname.value == "")
+		{
+		alert("Enter the file name");
+		return;
+		}
+	else
+		{
+		document.form1.submit();
+		}
+		
+	}
+
+</script>
+</body>
+</html>

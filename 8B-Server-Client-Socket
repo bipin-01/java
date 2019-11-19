@@ -1,0 +1,122 @@
+//Server.java
+
+import java.net.*;
+import java.io.*;
+import java.util.Scanner;
+public class Server {
+	public static void main(String args[])
+	{
+		ServerSocket server = null;
+		try
+		{
+			//System.out.println("Enter the port number: ");
+			//int port;
+			//Scanner sc = new Scanner(System.in);
+			//port = sc.nextInt();
+			server = new ServerSocket(Integer.parseInt(args[0]));
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		
+		while(true)
+		{
+			Socket client = null;
+			DataInputStream input = null;
+			PrintStream output = null;
+			try
+			{
+				client = server.accept();
+				input = new DataInputStream(client.getInputStream());
+				output = new PrintStream(client.getOutputStream());
+				
+			}
+			catch(Exception e) 
+			{
+				System.out.println(e);
+			}
+			output.println("Enter file name :");
+			try
+			{
+				String filename = input.readLine();
+				System.out.println("Client has requested file: " + filename);
+				
+				try
+				{
+					File f = new File(filename);
+					BufferedReader bf = new BufferedReader(new FileReader(f));
+					
+					String data;
+					
+					while((data = bf.readLine()) != null)
+					{
+						output.println(data);
+					}
+				}
+				catch(FileNotFoundException e)
+				{
+					System.out.println(e);
+				}
+				client.close();
+			}
+			catch(Exception e)
+			{
+				System.out.println(e);
+			}
+		}
+	}
+
+}
+
+
+//Client.java
+
+import java.net.*;
+import java.io.*;
+import java.util.Scanner;
+public class Client {
+	public static void main(String args[])
+	{
+		Socket client = null;
+		BufferedReader bf = null;
+		Scanner sc = new Scanner(System.in);
+		try
+		{
+		//	String ip = sc.nextLine();
+		//	int port = sc.nextInt();
+			client = new Socket(args[0],Integer.parseInt(args[1]));
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		DataInputStream input = null;
+		PrintStream output = null;
+		try
+		{
+			input = new DataInputStream(client.getInputStream());
+			output = new PrintStream(client.getOutputStream());
+			bf = new BufferedReader(new InputStreamReader(System.in));
+			String str = input.readLine();
+			System.out.println(str);
+			String filename = bf.readLine();
+			if(filename != null)
+			{
+				output.println(filename);
+			}
+			String data;
+			while((data = input.readLine()) != null)
+			{
+				System.out.println(data);
+			}
+			client.close();
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		
+		
+	}
+}

@@ -1,5 +1,4 @@
-
-
+//Outer.java
 public class Outer {
 	private int x = 10;
 	protected int z = 20;
@@ -14,5 +13,17 @@ public class Outer {
 		
 		System.out.println("Through same class, value of Outer class's x: " + ob1.x);
 		System.out.println("Through same class, value of Inner class's x: " + ob2.x);
+	}
+}
+
+//Main1b.java
+public class Main1b {
+	public static void main(String args[])
+	{
+		Outer ob1 = new Outer();
+		Outer.Inner ob2 = new Outer().new Inner();
+		
+		System.out.println("Through different class, Outer class's protected z : " + ob1.z);
+		System.out.println("Trhough different class, Outer class's protected z : " + ob2.z);
 	}
 }

@@ -1,0 +1,104 @@
+package Balance;
+import java.util.Scanner;
+
+public class Account
+{
+      double curBalance, amt;
+      Scanner sc = new Scanner(System.in);
+      
+      public Account()
+      {
+          curBalance = 500;
+      }
+      
+      void deposit()
+      {
+            System.out.println("Enter amount to deposit: ");
+            amt = sc.nextDouble();
+            curBalance += amt;
+            System.out.println("Current Balance is : " + curBalance);
+      }
+      
+      void withdraw()
+      {
+            System.out.println("Enter amount to withdraw: ");
+            amt = sc.nextDouble();
+            try
+            {
+                if(curBalance - amt < 500)
+                      throw LessBalanceException(amt);
+                curBalance -= amt;
+                System.out.println("Availabe balance is : " + curBalance);
+            }
+            catch(LessBalanceException e)
+            {
+                System.out.println(e);
+            }
+      }
+      
+      void display_balance()
+      {
+          System.out.println("Available current blance is : " + curBalance);
+      }
+}
+
+
+//LessBalanceException class
+package Balance;
+public LessBalanceException extends Exception
+{
+    //int amt;
+     LessBalanceException(double i)
+     {
+          System.out.println("Balance is less : " + i);
+     }
+}
+
+
+//Class For Main 
+package Balance;
+import java.util.Scanner;
+public class MainProgram
+{
+   pubilc static void main(String args[])
+   {
+           double amt;
+           int ch; //for choice
+           Scanner sc = new Scanner(System.in);
+
+           Account a = new Account();
+           String menu = "1. Deposit\n2. Withdraw\n3. Balance\n4. Exit\n5. Exit\n\nEnter your choice: ";
+           while(true)
+           {
+                 System.out.println(menu);
+                 ch = sc.nextInt();
+
+                 swtich(ch)
+                 {
+                      case 1: a.deposit();
+                              break;
+
+                      case 2: a.withdraw();
+                              break;
+
+                      case 3: a.display_balance();
+                              break;
+
+                      case 4: return;
+
+                      default: System.out.println("Invalid Option");
+                               break;
+                  }
+            }
+    } 
+}
+                
+                        
+            
+                
+           
+                        
+     
+     
+     
+       

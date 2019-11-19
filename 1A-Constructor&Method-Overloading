@@ -1,0 +1,62 @@
+import java.util.Scanner;
+public class Arithmetic {
+
+	int x, y;
+	Scanner sc = new Scanner(System.in);
+
+	Arithmetic()
+	{
+		System.out.println("Enter two intergers x, y :");
+		x = sc.nextInt();
+		y = sc.nextInt();
+	}
+	
+	void display()
+	{
+		System.out.println("Sum x + y = " + (x + y));
+		System.out.println("Sum x - y = " + (x - y));
+		System.out.println("Sum x * y = " + (x * y));
+		System.out.println("Sum x / y = " + (x / y));
+	}
+	
+	//Overloading Arithmetic()
+	Arithmetic(float x, float y)
+	{
+		System.out.println("Sum x + y = " + (x + y));
+		System.out.println("Sum x - y = " + (x - y));
+		System.out.println("Sum x * y = " + (x * y));
+		System.out.println("Sum x / y = " + (x / y));
+	}
+	
+	//Overloading display()
+	void display(int x)
+	{
+		System.out.println("Square root of " + x + " is : " + (x * x));
+	}
+	
+	public static void main(String args[])
+	{
+		//Doing Arith Opr in interger
+		Arithmetic a = new Arithmetic();
+		
+		//Display ArithOpr result
+		a.display();
+		
+		//Doing Arith Opr in Floating Point Number
+		float x, y;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter two floating point numbers, x and y : ");
+		x = sc.nextFloat();
+		y = sc.nextFloat();
+		
+		Arithmetic a1 = new Arithmetic(x, y);
+		
+		//now display with paramter
+		
+		System.out.println("Enter integer number, x :");
+		int x1  = sc.nextInt();
+		a1.display(x1);
+		sc.close();
+		
+	}
+}

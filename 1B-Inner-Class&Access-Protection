@@ -1,1 +1,18 @@
 
+
+public class Outer {
+	private int x = 10;
+	protected int z = 20;
+	class Inner {
+		private int x = 30;
+		protected int z = 40;
+	}
+	public static void main(String args[])
+	{
+		Outer ob1 = new Outer();
+		Inner ob2 = new Outer().new Inner();
+		
+		System.out.println("Through same class, value of Outer class's x: " + ob1.x);
+		System.out.println("Through same class, value of Inner class's x: " + ob2.x);
+	}
+}

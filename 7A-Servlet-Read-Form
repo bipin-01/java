@@ -1,0 +1,104 @@
+
+//Servlet7a.java
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.*;
+
+@WebServlet("/Servlet7a")
+
+public class Servlet7a extends HttpServlet
+{
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		String username = request.getParameter("username");
+		String userpass = request.getParameter("userpass");
+		
+		out.println("<!DOCTYPE html><head><title>Landing Page</title></head><body><h1>Servlet Demo for retrieving form details</h1></hr>");
+		out.println("<br />Retrieved User Name: " + username);
+		out.println("<br />Retrieved User Password: " + userpass);
+	
+	}
+}
+
+//hompage.html
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Homepage</title>
+<style type = "text/css">
+body
+{
+	background-color: orange;
+}
+#div1
+{
+	width: 30%;	
+	margin-left: 35%;
+
+}
+#div1 h1
+{
+	text-align: center;
+}
+form
+{
+		font-size: 200%;
+		color: blue;
+}
+
+input
+{
+
+		margin-left: 10%;
+		width: 80%;
+		height: 220%;
+}
+#sub
+{
+		width: 40%;
+		font-size: 80px;
+}
+</style>
+<script type = "text/javascript">
+function validate()
+{
+	if(document.form1.username.value == "" || document.form1.userpass.value == "")
+		{
+			alert("Please fill the from before you click submit");
+			return;
+			
+		}
+	else
+		{
+			document.form1.submit();
+		}
+}
+
+</script>
+</head>
+<body>
+<div id="div1">
+	 <h1>Servlet Program Demo</h1>
+	<form name = "form1" method = "post" action = "http://localhost:8080/Servlet7a/Servlet7a">
+	<fieldset>
+		<legend>User Login From</legend>
+		<label for = "username">User Name: </label>
+		<input type = "text"  name = "username" />
+		<br />
+		<label for = "userpass">Password:</label> 
+		<input type = "password" name ="userpass" />
+		<br />
+		<input id  = "sub" type = "button" value = "Login" onclick = "validate()" />
+		</fieldset>
+	</form>
+</div>
+
+</body>
+
+</html>
